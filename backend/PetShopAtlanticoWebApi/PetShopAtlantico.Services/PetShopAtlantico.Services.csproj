@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetshopAtlantico.DataBaseAccess.Entity\PetshopAtlantico.DataBaseAccess.Entity.csproj" />
+    <ProjectReference Include="..\PetShopAtlantico.Domain\PetShopAtlantico.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
