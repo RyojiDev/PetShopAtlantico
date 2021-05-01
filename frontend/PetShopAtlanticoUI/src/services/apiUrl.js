@@ -1,0 +1,1 @@
+export const REST_API_SERVER = "https://localhost:44389/api/";

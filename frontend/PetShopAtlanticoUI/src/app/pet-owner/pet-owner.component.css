@@ -1,0 +1,21 @@
+.section-cadastro{
+  border: 1px solid red;
+  display: flex;
+  width: 100%;
+  padding: 50px;
+}
+
+.form-cadastro{
+ flex-wrap: wrap;
+
+}
+
+.form-cadastro label{
+  display: flex;
+}
+
+.form-cadastro input{
+  flex: content;
+  width: 100%;
+  margin-bottom: 15px;
+}
