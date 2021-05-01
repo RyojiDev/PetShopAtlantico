@@ -1,0 +1,19 @@
+<p class="text-center">Lista de Pets</p>
+
+<div class="container">
+        
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Saude</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pet of pets">
+        <td>{{pet.name}}</td>
+        <td>{{pet.petHealth}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
