@@ -12,10 +12,16 @@
 
 .form-cadastro label{
   display: flex;
+  font-weight: 500;
 }
 
 .form-cadastro input{
   flex: content;
   width: 100%;
+  height: 30px;
   margin-bottom: 15px;
+}
+
+.message{
+  margin-top: 15px;
 }

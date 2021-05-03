@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { REST_API_SERVER } from '../../services/apiUrl';
+import { HttpClient } from '@angular/common/http';
 
 import { PetOwner } from './petOwner';
 
@@ -10,16 +11,25 @@ import { PetOwner } from './petOwner';
 })
 export class PetOwnerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  petOwner: PetOwner  
+  petOwner: PetOwner
+  message: string  
 
   ngOnInit(): void {
     this.petOwner = new PetOwner()
   }
 
   salvar(){
-    let teste = this.petOwner
+    
+    this.http.post(`${REST_API_SERVER}/petOwner/SavePetOwner`, this.petOwner).subscribe((petOwnerRest: PetOwner)=>{
+      debugger
+      this.petOwner = new PetOwner();
+      this.message = "Usuario cadastrado com sucesso!"
+      setTimeout(()=>{
+        this.message = ""
+      },2000)
+    })
   }
 
 }

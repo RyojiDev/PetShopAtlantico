@@ -11,6 +11,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PetOwnerComponent } from './pet-owner/pet-owner.component';
+import { AccomodationComponent } from './accomodation/accomodation.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,11 @@ import { PetOwnerComponent } from './pet-owner/pet-owner.component';
     HomeComponent,
     NotfoundComponent,
     PetOwnerComponent,
+    AccomodationComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },

@@ -1,18 +1,55 @@
-<p class="text-center">Lista de Pets</p>
+<div class="section-cadastro">
+  <form class="form-cadastro">
+    <fieldset>
+      <legend>cadastre o seu amiguinho aqui</legend>
+      <label for="petname">Nome:</label>
+      <input type="text" id="petname" [(ngModel)]="pet.name" name="petname" >
+      <label for="petHealth">Estado de Saúde:</label>
+      <select class="form-control" (change)="selectChangeHandlerHealth($event)">
+        <option *ngFor="let healthStatus of listhealthStatus" [value]="healthStatus.code">{{healthStatus.description}}</option>
+      </select>
+      <label for="photograph">Foto do amiguinho:</label>
+      <input type="text" id="photograph" [(ngModel)]="pet.petPhotograph" name="photograph" >
+      <label for="accomodation">Alojamento</label>
+      <select class="form-control" (change)="selectChangeHandler($event)">
+        <option *ngFor="let accomodation of accomodations" [value]="accomodation.id" [ngClass]="getStyleIfBusy(accomodation.available)">{{ accomodation.available == false ? accomodation.name + " - Ocupado" : accomodation.name + " - Disponivel"}}</option>
+      </select>
+      <label>Dados do Dono:</label>
+      <div class="form-group">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" [(ngModel)]="pet.petOwner.name" name="name" >
+          <label for="address">Endereço:</label>
+          <input type="text" id="address" [(ngModel)]="pet.petOwner.address" name="address" >
+          <label for="description">Descrição do serviço:</label>
+          <input type="text" id="description" name="description" [(ngModel)]="pet.petOwner.description">
+          <label for="phone">Telefone:</label>
+          <input type="text" id="phone" name="phone" [(ngModel)]="pet.petOwner.phone">
+      </div>
+      <button class="btn btn-primary btn-block" (click)="Salvar()" [disabled]="!pet.petOwner.name">Cadastrar</button>
+      <div class="alert alert-success message" *ngIf="message">
+        {{message}}
+      </div>
+    </fieldset>
+  </form>
+  </div>
 
+<p class="text-center">Lista de Pets</p>
 <div class="container">
-        
   <table class="table">
     <thead>
       <tr>
         <th>Nome</th>
         <th>Saude</th>
+        <th>Foto</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let pet of pets">
         <td>{{pet.name}}</td>
         <td>{{pet.petHealth}}</td>
+        <td>{{pet.petPhotograph}}</td>
+        <td><button (click)="Alterar(pet)" class='btn btn-warning'>Alterar</button></td>
+        <td><button (click)="Excluir(pet)" class='btn btn-warning'>Excluir</button></td>
       </tr>
     </tbody>
   </table>
