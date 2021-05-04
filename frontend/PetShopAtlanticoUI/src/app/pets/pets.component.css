@@ -3,6 +3,7 @@
   display: flex;
   width: 100%;
   padding: 50px;
+  flex-direction: column;
 }
 
 .form-cadastro{
@@ -24,4 +25,8 @@
 
 .message{
   margin-top: 15px;
+}
+
+#btn-update{
+  display: none;
 }

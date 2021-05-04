@@ -32,6 +32,7 @@ import { AccomodationComponent } from './accomodation/accomodation.component';
       { path: '', component: HomeComponent },
       { path: 'pets', component: PetsComponent },
       { path: 'donos', component: PetOwnerComponent},
+      { path: 'alojamentos', component: AccomodationComponent},
       { path: '**' , component: NotfoundComponent },
     ])
   ],

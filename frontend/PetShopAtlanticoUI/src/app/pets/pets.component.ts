@@ -15,10 +15,11 @@ export class PetsComponent implements OnInit {
   healthstatus = 0;
   constructor(private http: HttpClient) { }
  
-  public pets = []
+  public pets = [] 
   public accomodations = []
   public listhealthStatus = []
   pet: Pet
+  petSearch: Pet
 
   message: string;
 
@@ -29,21 +30,20 @@ export class PetsComponent implements OnInit {
     this.selectedValue = 1;
     this.healthstatus = 1;
 
-    this.http.get(`${REST_API_SERVER}/pet/GetAllPets`).subscribe((data: any[])=>{
-      this.pets = data;
-    });
-
+    
+    this.getAllPets();
     this.getAccomodationId();
     this.getHealthStatus();
 
   }
 
-  Salvar(){ 
+  Save(){ 
     this.http.post(`${REST_API_SERVER}/pet/SavePet`, this.pet).subscribe((petRest: Pet)=>{
       debugger
       this.pet = new Pet()
       this.pet.petOwner = new PetOwner()
       this.getAccomodationId();
+      this.getAllPets();
 
       this.message = "Usuario cadastrado com sucesso!"
       setTimeout(()=>{
@@ -62,16 +62,51 @@ export class PetsComponent implements OnInit {
     })
   }
 
-  Alterar(pet: Pet){
-
+  UpdatePet(pet: Pet){
+    this.pet = pet
+    this.http.put(`${REST_API_SERVER}/pet/UpdatePet`,pet).subscribe((newPet: Pet)=>{
+      this.pet = new Pet()
+      this.pet.petOwner = new PetOwner()
+      this.getAccomodationId();
+      this.getAllPets();
+      
+      this.message = "Usuario Atualizado com sucesso!"
+      setTimeout(()=>{
+        this.message = ""        
+        document.getElementById("btn-update").style.display = "none"
+        document.getElementById("btn-save").style.display = "block";
+      },2000)
+    })
   }
 
-  Excluir(pet: Pet){
+  Update(_pet: Pet, _owner: PetOwner){
+    console.log(_pet);
+    this.pet = _pet
+    console.log(_owner)
+    this.pet.petOwner = _owner;
+    document.getElementById("btn-save").style.display = "none";
+    document.getElementById("btn-update").style.display = "block"
+  }
 
+  Delete(pet){
+    if(confirm(`Tem certeza que deseja deletar o pet ${pet.name} ?`)){
+      this.http.delete(`${REST_API_SERVER}/pet/DeletePet?id=${pet.id}`).subscribe(()=>{
+        this.pet = new Pet()
+        this.pet.petOwner = new PetOwner()
+        this.getAccomodationId();
+        this.getAllPets();
+        
+        this.message = "Usuario Atualizado com sucesso!"
+        setTimeout(()=>{
+          this.message = ""        
+          document.getElementById("btn-update").style.display = "none"
+          document.getElementById("btn-save").style.display = "block";
+        },2000)
+      })
+    }
   }
 
   getAccomodationId = () =>{
-    console.log(this.pet);
   this.http.get(`${REST_API_SERVER}/PetAccommodation/getListAllAccomodation`).subscribe((data: any[])=>{
     console.log(data);
     this.accomodations = data;
@@ -79,12 +114,29 @@ export class PetsComponent implements OnInit {
 }
 
   getHealthStatus = () =>{
-  console.log(this.pet);
   this.http.get(`${REST_API_SERVER}/Pet/GetHealthStatus`).subscribe((data: any[])=>{
   console.log(data);
   this.listhealthStatus = data;
 });
 }
+
+  getAllPets = () =>{
+    this.http.get(`${REST_API_SERVER}/pet/GetAllPets`).subscribe((data: any[])=>{
+      this.pets = data;
+      console.log(data);
+    });
+  }
+
+  getPetByName(){
+    let name = (<HTMLSelectElement>document.getElementById("search")).value;
+
+    alert(name);
+    this.http.get(`${REST_API_SERVER}/pet/SearchPet?name=${name}`).subscribe((data: Pet)=>{
+      console.log(data);
+      debugger
+      this.petSearch = data;
+    });
+  }
 
   selectChangeHandler (event: any){
     this.selectedValue = parseInt(event.target.value);
@@ -106,4 +158,16 @@ export class PetsComponent implements OnInit {
       return 'text-success'
     }
   }
+
+  formatPetHealth(health){
+    switch(health){
+      case 0:
+        return "Em Tratamento"
+      case 1:
+        return "Se Recuperando"
+      case 2:
+        return "Recuperado"    
+    }
+  }
+  
 }

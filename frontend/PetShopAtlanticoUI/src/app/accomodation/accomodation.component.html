@@ -1,1 +1,19 @@
-<p>accomodation works!</p>
+<div>
+  <h2 class="text-center">Lista de Alojamentos</h2>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let accomodation of accomodations">
+        <td>{{accomodation.name}}</td>
+        <td [ngClass]="verifyAvaiable(accomodation.available)">{{getStatusAccomodation(accomodation.accommodationStatus)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
