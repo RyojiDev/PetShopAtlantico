@@ -20,33 +20,18 @@ namespace PetShopAtlanticoWebApi.Controllers
             _petOwnerServices = petOwnerServices;
         }
 
+        [HttpGet("GetPetOwner")]
+        public IActionResult GetPetOwner(int id)
+        {
+            _petOwnerServices.GetPetOwnerByNameOrId(id);
+            return Ok();
+        }
+
         [HttpPost("SavePetOwner")]
         public IActionResult SavePetOwner([FromBody] PetOwner owner)
         {
             _petOwnerServices.SavePetOwner(owner);
             return Ok(owner);
-        }
-
-        [HttpGet("PetOwner")]
-        public IActionResult PetOwner()
-        {
-            var petOwner = new PetOwner()
-            {
-                Address = "Endereço",
-                Description = "Tratamento diario",
-                Name = "Ryoji kitano",
-                Pet = new List<Pet>()
-                {
-                   new Pet()
-                   {
-                        Name = "Dhara",
-                        PetHealth = "Saudadevel",
-                        PetPhotograph = "teste",
-                         IdPetOwner = 1
-                   }
-                }
-            };
-            return Ok(petOwner);
         }
     }
 }

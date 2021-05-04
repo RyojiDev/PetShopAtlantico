@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetshopAtlantico.DataBaseAccess.Entity;
 
 namespace PetShopAtlanticoWebApi.Migrations
 {
     [DbContext(typeof(PetShopDbContext))]
-    partial class PetShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210502175140_petDependency")]
+    partial class petDependency
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,7 @@ namespace PetShopAtlanticoWebApi.Migrations
 
             modelBuilder.Entity("PetShopAtlantico.Domain.PetAccomodation", b =>
                 {
-                    b.Property<int>("PetAccomodationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -29,13 +31,10 @@ namespace PetShopAtlanticoWebApi.Migrations
                     b.Property<int>("AccommodationStatus")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Available")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PetAccomodationId");
+                    b.HasKey("Id");
 
                     b.ToTable("PetAccomodations");
                 });
@@ -51,30 +50,21 @@ namespace PetShopAtlanticoWebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PetAccomodationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PetHealth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PetOwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("PetHealth")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PetPhotograph")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PetAccomodationId");
-
-                    b.HasIndex("PetOwnerId");
-
                     b.ToTable("Pets");
                 });
 
             modelBuilder.Entity("PetshopAtlantico.Domain.PetOwner", b =>
                 {
-                    b.Property<int>("PetOwnerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -85,42 +75,37 @@ namespace PetShopAtlanticoWebApi.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdPet")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PetOwnerId");
+                    b.Property<int?>("petId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("petId");
 
                     b.ToTable("PetsOwner");
                 });
 
-            modelBuilder.Entity("PetshopAtlantico.Domain.Pet", b =>
-                {
-                    b.HasOne("PetShopAtlantico.Domain.PetAccomodation", "PetAccomodation")
-                        .WithMany("Pet")
-                        .HasForeignKey("PetAccomodationId");
-
-                    b.HasOne("PetshopAtlantico.Domain.PetOwner", "PetOwner")
-                        .WithMany("Pet")
-                        .HasForeignKey("PetOwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PetAccomodation");
-
-                    b.Navigation("PetOwner");
-                });
-
-            modelBuilder.Entity("PetShopAtlantico.Domain.PetAccomodation", b =>
-                {
-                    b.Navigation("Pet");
-                });
-
             modelBuilder.Entity("PetshopAtlantico.Domain.PetOwner", b =>
                 {
-                    b.Navigation("Pet");
+                    b.HasOne("PetshopAtlantico.Domain.Pet", "pet")
+                        .WithMany("PetOwner")
+                        .HasForeignKey("petId");
+
+                    b.Navigation("pet");
+                });
+
+            modelBuilder.Entity("PetshopAtlantico.Domain.Pet", b =>
+                {
+                    b.Navigation("PetOwner");
                 });
 #pragma warning restore 612, 618
         }

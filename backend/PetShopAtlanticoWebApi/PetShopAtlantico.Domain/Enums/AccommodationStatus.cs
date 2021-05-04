@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetShopAtlantico.Domain
+namespace PetShopAtlantico.Domain.Enums
 {
     public enum AccommodationStatus
     {

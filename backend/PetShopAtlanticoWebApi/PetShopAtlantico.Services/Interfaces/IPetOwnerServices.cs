@@ -9,5 +9,6 @@ namespace PetShopAtlantico.Services.Interfaces
     {
         void SavePetOwner(PetOwner owner);
         void ListPetOwner();
+        void GetPetOwnerByNameOrId(int id);
     }
 }

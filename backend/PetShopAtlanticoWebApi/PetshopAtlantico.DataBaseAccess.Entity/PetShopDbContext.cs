@@ -8,11 +8,19 @@ namespace PetshopAtlantico.DataBaseAccess.Entity
     {
         public PetShopDbContext(DbContextOptions<PetShopDbContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<Pet> Pets { get; set; }
-        public DbSet<PetOwner> PetsOwner {get; set;}
+        public DbSet<PetOwner> PetsOwner { get; set; }
         public DbSet<PetAccomodation> PetAccomodations { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
+        
+
     }
 }

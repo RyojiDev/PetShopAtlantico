@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PetshopAtlantico.Domain;
+using PetShopAtlantico.Domain;
+using PetShopAtlantico.Domain.Dtos;
 using PetShopAtlantico.Services.Interfaces;
 using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace PetShopAtlanticoWebApi.Controllers
 {
@@ -19,15 +24,18 @@ namespace PetShopAtlanticoWebApi.Controllers
         [HttpGet("GetAllPets")]
         public IActionResult GetAllPets()
         {
-            List<Pet> listPets = _petServices.ListAllPets();
+            List<PetDTO> listPets = _petServices.ListAllPets();
+            
             return Ok(listPets);
         }
 
         [HttpPost("SavePet")]
-        public IActionResult SavePet([FromBody] Pet pet)
+        public IActionResult SavePet([FromBody] PetDTO pet)
         {
-            _petServices.SavePet(pet);
-            return Ok();
+            PetDTO petCreate = _petServices.SavePet(pet);
+            if (petCreate == null)
+                return NotFound();
+            return Created($"/api/Pet/{petCreate}",petCreate);
         }
 
         [HttpGet("SearchPet")]
@@ -39,19 +47,25 @@ namespace PetShopAtlanticoWebApi.Controllers
             return Ok(pet);
         }
 
-        [HttpGet("Pet")]
-        public JsonResult Pet()
+        [HttpGet("GetHealthStatus")]
+        public List<object> GetHealthStatus()
         {
-            Pet pet = new Pet()
-            {
-                Id = 1,
-                IdPetOwner = 1,
-                Name = "Dhara",
-                PetHealth = "Saudavel",
-                PetPhotograph = "teste"
-            };
+            List<object> listStatus = _petServices.GetHealthStatus();
+            return listStatus;
+        }
 
-            return new JsonResult(pet);
+        [HttpDelete("DeletePet")]
+        public IActionResult DeletePet(int id)
+        {
+            _petServices.DeletePet(id);
+            return NoContent();
+        }
+
+        [HttpPut("UpdatePet")]
+        public async Task<IActionResult> UpdatePet(PetDTO pet)
+        {
+           await _petServices.UpdatePet(pet);
+            return NoContent();
         }
     }
 }

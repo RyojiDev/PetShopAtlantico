@@ -25,5 +25,10 @@ namespace PetShopAtlantico.Services.Implementation
             _context.Add(owner);
             _context.SaveChanges();
         }
+
+        public void GetPetOwnerByNameOrId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

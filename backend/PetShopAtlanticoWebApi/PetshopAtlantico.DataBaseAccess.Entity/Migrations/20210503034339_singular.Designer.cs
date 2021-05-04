@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetshopAtlantico.DataBaseAccess.Entity;
 
 namespace PetShopAtlanticoWebApi.Migrations
 {
     [DbContext(typeof(PetShopDbContext))]
-    partial class PetShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210503034339_singular")]
+    partial class singular
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,7 @@ namespace PetShopAtlanticoWebApi.Migrations
 
             modelBuilder.Entity("PetShopAtlantico.Domain.PetAccomodation", b =>
                 {
-                    b.Property<int>("PetAccomodationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -35,7 +37,7 @@ namespace PetShopAtlanticoWebApi.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PetAccomodationId");
+                    b.HasKey("Id");
 
                     b.ToTable("PetAccomodations");
                 });
@@ -54,8 +56,9 @@ namespace PetShopAtlanticoWebApi.Migrations
                     b.Property<int?>("PetAccomodationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PetHealth")
-                        .HasColumnType("int");
+                    b.Property<string>("PetHealth")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PetOwnerId")
                         .HasColumnType("int");
@@ -74,7 +77,7 @@ namespace PetShopAtlanticoWebApi.Migrations
 
             modelBuilder.Entity("PetshopAtlantico.Domain.PetOwner", b =>
                 {
-                    b.Property<int>("PetOwnerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -91,7 +94,7 @@ namespace PetShopAtlanticoWebApi.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PetOwnerId");
+                    b.HasKey("Id");
 
                     b.ToTable("PetsOwner");
                 });
