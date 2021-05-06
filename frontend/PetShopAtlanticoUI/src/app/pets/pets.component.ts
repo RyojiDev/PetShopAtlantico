@@ -15,7 +15,7 @@ export class PetsComponent implements OnInit {
   healthstatus = 0;
   constructor(private http: HttpClient) { }
  
-  public pets = [] 
+  public pets = undefined 
   public accomodations = []
   public listhealthStatus = []
   pet: Pet
@@ -39,7 +39,6 @@ export class PetsComponent implements OnInit {
 
   Save(){ 
     this.http.post(`${REST_API_SERVER}/pet/SavePet`, this.pet).subscribe((petRest: Pet)=>{
-      debugger
       this.pet = new Pet()
       this.pet.petOwner = new PetOwner()
       this.getAccomodationId();
@@ -80,9 +79,7 @@ export class PetsComponent implements OnInit {
   }
 
   Update(_pet: Pet, _owner: PetOwner){
-    console.log(_pet);
     this.pet = _pet
-    console.log(_owner)
     this.pet.petOwner = _owner;
     document.getElementById("btn-save").style.display = "none";
     document.getElementById("btn-update").style.display = "block"
@@ -120,11 +117,19 @@ export class PetsComponent implements OnInit {
 });
 }
 
-  getAllPets = () =>{
+  getAllPets = () =>{  
+      let name = (<HTMLSelectElement>document.getElementById("search")).value;
+    if(name){
+      this.http.get(`${REST_API_SERVER}/pet/SearchPet?name=${name}`).subscribe((data: Pet)=>{
+        console.log(data);
+        this.pets = data;
+      });
+    }else{
     this.http.get(`${REST_API_SERVER}/pet/GetAllPets`).subscribe((data: any[])=>{
       this.pets = data;
       console.log(data);
     });
+  }
   }
 
   getPetByName(){
@@ -133,7 +138,6 @@ export class PetsComponent implements OnInit {
     alert(name);
     this.http.get(`${REST_API_SERVER}/pet/SearchPet?name=${name}`).subscribe((data: Pet)=>{
       console.log(data);
-      debugger
       this.petSearch = data;
     });
   }

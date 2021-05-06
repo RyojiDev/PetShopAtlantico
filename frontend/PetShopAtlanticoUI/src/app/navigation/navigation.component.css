@@ -1,3 +1,44 @@
 .side-bar-menu{
   margin-top: 40px;
 }
+
+.navbar-color{
+  background-color: #91672C;
+}
+
+/*@media (width: 1024px) {
+  .img-container{
+    width: 1024px;
+  }
+}
+
+@media (min-width: 667px ){
+  .img-container{
+    width: 150%;
+  }
+}
+
+@media screen and (min-width: 1000px)  {
+  .img-container{
+    width: 150%;
+  }
+}
+
+@media screen and (min-width: 1216px)  {
+  .img-container{
+    width: 250%;
+  }
+}*/
+
+.img-banner{
+ 
+  display: flexbox;
+  flex: 1;
+  align-items: center;
+}
+
+.img-banner img{
+  align-content: space-between;
+  align-items: flex-end;
+  flex-direction: row;
+}

@@ -1,48 +1,68 @@
+  <div class="row">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow header-spaces col-12 search">
+      <input id="search"class="form-control form-control-dark w-100" type="text" placeholder="Digite algo para buscar" aria-label="Search">
+      <button class="btn btn-primary button-search" (click)="getAllPets()">Buscar</button>
+    </nav>
+  </div>
 
-<div class="section-cadastro">
-  <form class="form-cadastro">
-    <fieldset>
-      <legend>cadastre o seu amiguinho aqui</legend>
+<div class="row">
+  <div class="col-lg-5 col-md-12 col-sm-12">
+  <form>
+    <div class="form-group">
+      <h2 class="text-center">Cadastre o seu amiguinho aqui</h2>
       <label for="petname">Nome:</label>
-      <input type="text" id="petname" [(ngModel)]="pet.name" name="petname" >
+      <input class="form-control" type="text" id="petname" [(ngModel)]="pet.name" name="petname" >
+    </div>
+    <div class="form-group">
       <label for="petHealth">Estado de Saúde:</label>
       <select class="form-control" (change)="selectChangeHandlerHealth($event)">
         <option *ngFor="let healthStatus of listhealthStatus" [value]="healthStatus.code">{{healthStatus.description}}</option>
       </select>
+    </div>
+    <div class="form-group">
       <label for="photograph">Foto do amiguinho:</label>
-      <input type="text" id="photograph" [(ngModel)]="pet.petPhotograph" name="photograph" >
+      <input type="text" class="form-control" id="photograph" [(ngModel)]="pet.petPhotograph" name="photograph" >
+    </div>
+    <div class="form-group">
       <label for="accomodation">Alojamento</label>
       <select class="form-control" (change)="selectChangeHandler($event)">
         <option *ngFor="let accomodation of accomodations" [value]="accomodation.petAccomodationId" [ngClass]="getStyleIfBusy(accomodation.available)">{{ accomodation.available == false ? accomodation.name + " - Ocupado" : accomodation.name + " - Disponivel"}}</option>
       </select>
-      <label>Dados do Dono:</label>
+    </div>
+    <legend class="text-center">Dados do Dono:</legend>
       <div class="form-group">
           <label for="name">Nome:</label>
-          <input type="text" id="name" [(ngModel)]="pet.petOwner.name" name="name" >
+          <input type="text" class="form-control" id="name" [(ngModel)]="pet.petOwner.name" name="name" >
+      </div>
+      <div class="form-group">
           <label for="address">Endereço:</label>
-          <input type="text" id="address" [(ngModel)]="pet.petOwner.address" name="address" >
-          <label for="description">Descrição do serviço:</label>
-          <input type="text" id="description" name="description" [(ngModel)]="pet.petOwner.description">
+          <input type="text" class="form-control" id="address" [(ngModel)]="pet.petOwner.address" name="address" >
+      </div>
+      <div class="form-group">    
+          <label for="description">Descrição do Atendimento:</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="pet.petOwner.description">
+      </div>
+      <div class="form-group">
           <label for="phone">Telefone:</label>
-          <input type="text" id="phone" name="phone" [(ngModel)]="pet.petOwner.phone">
+          <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="pet.petOwner.phone">
       </div>
       <button class="btn btn-success btn-block" id="btn-save" (click)="Save()" [disabled]="!pet.petOwner.name">Cadastrar</button>
       <button class="btn btn-primary btn-block" id="btn-update" (click)="UpdatePet(pet)">Atualizar</button>
       <div class="alert alert-success message" *ngIf="message">
         {{message}}
       </div>
-    </fieldset>
   </form>
-
-
-<p class="text-center">Lista de Pets</p>
-<div class="container">
+</div>
+<div class="col-lg-6">
+<div class="table-striped" style="height: max-content;">
+  <h1 class="text-center">Lista de Pets</h1>
   <table class="table">
     <thead>
       <tr>
         <th>Nome</th>
         <th>Saude</th>
         <th>Foto</th>
+        <th>#</th>
         <th>#</th>
         <th>#</th>
       </tr>
@@ -53,9 +73,11 @@
         <td>{{formatPetHealth(pet.petHealth)}}</td>
         <td>{{pet.petPhotograph}}</td>
         <td><button (click)="Update(pet, pet.petOwner)" class='btn btn-primary'>Alterar</button></td>
-        <td><button (click)="Delete(pet)" class='btn btn-danger'>Excluir</button></td>
+        <td><button (click)="Delete(pet)" class='btn btn-danger'><i class="far fa-trash-alt">Excluir</i></button></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
+</div>
 </div>
 </div>

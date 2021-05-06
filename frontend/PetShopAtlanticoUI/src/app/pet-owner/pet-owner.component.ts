@@ -13,23 +13,32 @@ export class PetOwnerComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
+  public petOwners = undefined
   petOwner: PetOwner
   message: string  
 
   ngOnInit(): void {
     this.petOwner = new PetOwner()
+    this.getAllPetOwner();
   }
 
   salvar(){
     
     this.http.post(`${REST_API_SERVER}/petOwner/SavePetOwner`, this.petOwner).subscribe((petOwnerRest: PetOwner)=>{
-      debugger
       this.petOwner = new PetOwner();
       this.message = "Usuario cadastrado com sucesso!"
       setTimeout(()=>{
         this.message = ""
       },2000)
     })
+  }
+
+  getAllPetOwner = () => {
+    this.http.get(`${REST_API_SERVER}/PetOwner/GetAllPetOwner`).subscribe((data: PetOwner)=>{
+      console.log(data);
+      this.petOwners = data;
+      console.log(data);
+    });
   }
 
 }

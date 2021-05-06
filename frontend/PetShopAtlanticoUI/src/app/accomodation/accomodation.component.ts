@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { REST_API_SERVER } from '../../services/apiUrl'
-
+import { PetAccomodation } from './petAccomodation';
+ 
 @Component({
   selector: 'app-accomodation',
   templateUrl: './accomodation.component.html',
@@ -12,8 +13,11 @@ export class AccomodationComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   public accomodations = []
+  petAccomodation: PetAccomodation
+  message: string
 
   ngOnInit(): void {
+    this.petAccomodation = new PetAccomodation();
     this.getListAccomodation()
   }
 
@@ -40,5 +44,29 @@ export class AccomodationComponent implements OnInit {
     }else{
       return 'text-success'
     }
+  }
+
+  SaveAccomodation(){
+    debugger
+    this.petAccomodation.available = true;
+    this.http.post(`${REST_API_SERVER}/PetAccommodation/SaveAccomodation`, this.petAccomodation).subscribe((accomodationRest: PetAccomodation)=>{
+      debugger
+      this.petAccomodation = new PetAccomodation()
+      this.getListAccomodation()
+
+      this.message = "Alojamento cadastrado com sucesso!"
+      setTimeout(()=>{
+        this.message = ""
+      },2000)
+    },erro => {
+      if(erro.status == 404 || erro.status == 400 || 500){
+        this.message = "Erro ao tentar cadastrar o alojamento"
+        this.petAccomodation = new PetAccomodation();
+        this.getListAccomodation()
+        setTimeout(()=>{
+          this.message = ""
+        },2000)
+      }
+    })
   }
 }

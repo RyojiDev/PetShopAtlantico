@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PetOwnerComponent } from './pet-owner/pet-owner.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AccomodationComponent } from './accomodation/accomodation.component';
     NotfoundComponent,
     PetOwnerComponent,
     AccomodationComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

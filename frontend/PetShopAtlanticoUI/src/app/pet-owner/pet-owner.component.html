@@ -1,19 +1,42 @@
 <div class="section-cadastro">
 <form class="form-cadastro">
   <fieldset>
-    <legend>Faça o seu cadastro e do seu amiguinho aqui</legend>
+    <legend>Faça o seu cadastro aqui</legend>
     <label for="name">Nome:</label>
-    <input type="text" id="name" [(ngModel)]="petOwner.name" name="name" >
+    <input type="text" class="form-control" id="name" [(ngModel)]="petOwner.name" name="name" >
     <label for="address">Endereço:</label>
-    <input type="text" id="address" [(ngModel)]="petOwner.address" name="address" >
+    <input type="text" class="form-control" id="address" [(ngModel)]="petOwner.address" name="address" >
     <label for="description">Descrição do serviço:</label>
-    <input type="text" id="description" name="description" [(ngModel)]="petOwner.description">
+    <input type="text" class="form-control" id="description" name="description" [(ngModel)]="petOwner.description">
     <label for="phone">Telefone:</label>
-    <input type="text" id="phone" name="phone" [(ngModel)]="petOwner.phone">
+    <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="petOwner.phone">
     <button class="btn btn-primary btn-block" (click)="salvar()" [disabled]="!petOwner.name">Cadastrar</button>
     <div class="alert alert-success message" *ngIf="message">
       {{message}}
     </div>
   </fieldset>
 </form>
+</div>
+
+
+<div class="table-striped">
+  <h1 class="text-center">Lista de Donos</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>Descrição do atendimento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let petOwner of petOwners">
+        <td>{{petOwner.name}}</td>
+        <td>{{petOwner.address}}</td>
+        <td>{{petOwner.phone}}</td>
+        <td>{{petOwner.description}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

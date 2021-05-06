@@ -1,0 +1,15 @@
+.flexTableContainer{
+  display: flex;
+  flex: 1;
+  align-content: center;
+  flex-direction: column;
+}
+
+.table-flex{
+  flex: 1;
+ 
+}
+
+.flex-title{
+  align-items: center;
+}

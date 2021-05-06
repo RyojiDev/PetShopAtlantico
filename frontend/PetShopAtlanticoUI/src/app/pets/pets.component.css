@@ -3,7 +3,9 @@
   display: flex;
   width: 100%;
   padding: 50px;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  align-items: flex-start;
 }
 
 .form-cadastro{
@@ -29,4 +31,24 @@
 
 #btn-update{
   display: none;
+}
+
+.container-table{
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.search{
+  margin-bottom: 20px;
+}
+
+.search  input{
+  padding: 20px;
+}
+
+.section-header{
+  width: 100%;
+  flex-direction: column;
+  flex-direction: row;
+  padding: 50px;
 }
