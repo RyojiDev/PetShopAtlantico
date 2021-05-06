@@ -48,6 +48,11 @@ namespace PetShopAtlantico.XUnitTest
             throw new NotImplementedException();
         }
 
+        public PetDTO GetPetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<PetDTO> ListAllPets()
         {
             throw new NotImplementedException();

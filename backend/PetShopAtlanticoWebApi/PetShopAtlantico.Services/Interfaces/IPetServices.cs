@@ -14,5 +14,6 @@ namespace PetShopAtlantico.Services.Interfaces
         List<object> GetHealthStatus();
         void DeletePet(int id);
         Task UpdatePet(PetDTO pet);
+        PetDTO GetPetById(int id);
     }
 }

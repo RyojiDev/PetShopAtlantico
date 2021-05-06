@@ -1,4 +1,5 @@
 import { PetOwner } from '../pet-owner/petOwner';
+import { PetAccomodation } from '../accomodation/petAccomodation'
 
 export class Pet{
   constructor(){}
@@ -8,4 +9,5 @@ export class Pet{
   petPhotograph: string
   accomodationId: number
   petOwner: PetOwner
+  petAccomodation: PetAccomodation
 }

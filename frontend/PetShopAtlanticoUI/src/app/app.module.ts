@@ -13,6 +13,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { PetOwnerComponent } from './pet-owner/pet-owner.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
 import { FooterComponent } from './footer/footer.component';
+import { PetDetailComponent } from './pet-detail/pet-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FooterComponent } from './footer/footer.component';
     PetOwnerComponent,
     AccomodationComponent,
     FooterComponent,
+    PetDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'pets', component: PetsComponent },
+      { path: 'pet-detalhe/:id', component: PetDetailComponent},
       { path: 'donos', component: PetOwnerComponent},
       { path: 'alojamentos', component: AccomodationComponent},
       { path: '**' , component: NotfoundComponent },

@@ -36,5 +36,21 @@ namespace PetShopAtlantico.Domain.Dtos
             }
             return listPetsDTO;
         }
+
+        public static PetDTO generatePetById(Pet pet)
+        {
+            PetDTO petDTO = new PetDTO()
+            {
+                 Id = pet.Id,
+                 AccomodationId = pet.AccomodationId,
+                 Name = pet.Name,
+                 PetAccomodation = pet.PetAccomodation,
+                 PetHealth = pet.PetHealth,
+                 PetOwner = pet.PetOwner,
+                 PetPhotograph = pet.PetPhotograph
+            };
+
+            return petDTO;
+        }
     }
 }

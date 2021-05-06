@@ -1,0 +1,30 @@
+.detalhe-pet h2{
+  text-align: center;
+}
+
+.detalhe-pet span{
+  padding: 5px;
+}
+
+.photo{
+  width: 140px;
+  height: 250px;
+  border: 1px solid red;
+  position: relative;
+  align-content: flex-end;
+  flex: 1;
+  
+}
+
+.col-photo{
+  display: flex;
+  align-items:flex-start;
+}
+
+label{
+  font-weight: 700;
+}
+
+span{
+  padding: 10px;
+}

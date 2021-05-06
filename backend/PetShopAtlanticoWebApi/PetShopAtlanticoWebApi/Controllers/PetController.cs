@@ -32,6 +32,15 @@ namespace PetShopAtlanticoWebApi.Controllers
             return Ok(listPets);
         }
 
+        [HttpGet("GetPetById")]
+        public IActionResult GetPetById(int id)
+        {
+            PetDTO pet = _petServices.GetPetById(id);
+            if (pet == null)
+                return NotFound();
+            return Ok(pet);
+        }
+
         [HttpPost("SavePet")]
         public IActionResult SavePet([FromBody] PetDTO pet)
         {

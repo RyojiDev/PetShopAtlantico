@@ -61,7 +61,6 @@
       <tr>
         <th>Nome</th>
         <th>Saude</th>
-        <th>Foto</th>
         <th>#</th>
         <th>#</th>
         <th>#</th>
@@ -71,10 +70,9 @@
       <tr *ngFor="let pet of pets">
         <td>{{pet.name}}</td>
         <td>{{formatPetHealth(pet.petHealth)}}</td>
-        <td>{{pet.petPhotograph}}</td>
         <td><button (click)="Update(pet, pet.petOwner)" class='btn btn-primary'>Alterar</button></td>
         <td><button (click)="Delete(pet)" class='btn btn-danger'><i class="far fa-trash-alt">Excluir</i></button></td>
-        <td></td>
+        <td><a routerLink="/pet-detalhe/{{pet.id}}" class="btn btn-info">Ver</a></td>
       </tr>
     </tbody>
   </table>

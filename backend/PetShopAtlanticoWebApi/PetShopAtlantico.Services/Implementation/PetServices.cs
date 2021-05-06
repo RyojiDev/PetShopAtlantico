@@ -70,6 +70,20 @@ namespace PetshopAtlantico.Services.Implementation
             return healthStatus;
         }
 
+        public PetDTO GetPetById(int id)
+        {
+            try
+            {
+                Pet pet = _context.Set<Pet>().Include(p => p.PetOwner).Include(p => p.PetAccomodation).FirstOrDefault(p => p.Id == id);
+                return PetDTO.generatePetById(pet);
+                
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("não foi possivel localizar");
+            }
+        }
+
         public List<PetDTO> ListAllPets()
         {
             try 
