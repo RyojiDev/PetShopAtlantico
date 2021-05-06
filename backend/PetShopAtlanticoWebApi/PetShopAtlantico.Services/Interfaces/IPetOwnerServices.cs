@@ -8,7 +8,6 @@ namespace PetShopAtlantico.Services.Interfaces
     public interface IPetOwnerServices
     {
         void SavePetOwner(PetOwner owner);
-        void ListPetOwner();
-        void GetPetOwnerByNameOrId(int id);
+        List<PetOwner> GetAllPetOwner();
     }
 }

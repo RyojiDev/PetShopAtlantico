@@ -20,18 +20,18 @@ namespace PetShopAtlanticoWebApi.Controllers
             _petOwnerServices = petOwnerServices;
         }
 
-        [HttpGet("GetPetOwner")]
-        public IActionResult GetPetOwner(int id)
-        {
-            _petOwnerServices.GetPetOwnerByNameOrId(id);
-            return Ok();
-        }
-
         [HttpPost("SavePetOwner")]
         public IActionResult SavePetOwner([FromBody] PetOwner owner)
         {
             _petOwnerServices.SavePetOwner(owner);
             return Ok(owner);
+        }
+
+        [HttpGet("GetAllPetOwner")]
+        public IActionResult GetAllPetOwner()
+        {
+            var listPetOwner = _petOwnerServices.GetAllPetOwner();
+            return Ok(listPetOwner);
         }
     }
 }

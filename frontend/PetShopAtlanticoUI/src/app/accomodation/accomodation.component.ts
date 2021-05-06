@@ -47,10 +47,8 @@ export class AccomodationComponent implements OnInit {
   }
 
   SaveAccomodation(){
-    debugger
     this.petAccomodation.available = true;
     this.http.post(`${REST_API_SERVER}/PetAccommodation/SaveAccomodation`, this.petAccomodation).subscribe((accomodationRest: PetAccomodation)=>{
-      debugger
       this.petAccomodation = new PetAccomodation()
       this.getListAccomodation()
 

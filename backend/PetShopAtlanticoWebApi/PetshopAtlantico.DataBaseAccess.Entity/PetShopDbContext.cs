@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PetshopAtlantico.DataBaseAccess.Entity.Mappings;
 using PetshopAtlantico.Domain;
 using PetShopAtlantico.Domain;
 
@@ -20,7 +21,9 @@ namespace PetshopAtlantico.DataBaseAccess.Entity
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PetAccomodationMap());
+        }
     }
 }

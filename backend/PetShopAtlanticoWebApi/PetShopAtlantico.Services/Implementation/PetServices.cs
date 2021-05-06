@@ -15,12 +15,10 @@ namespace PetshopAtlantico.Services.Implementation
     public class PetServices : IPetServices
     {
         private readonly PetShopDbContext _context;
-        private readonly IPetAccomodationServices _accomodationServices;
 
-        public PetServices(PetShopDbContext context, IPetAccomodationServices accomodationServices)
+        public PetServices(PetShopDbContext context)
         {
             _context = context;
-            _accomodationServices = accomodationServices;
         }
 
         public void DeletePet(int id)
@@ -86,12 +84,11 @@ namespace PetshopAtlantico.Services.Implementation
             }
         }
 
-        public PetDTO SavePet(PetDTO pet)
+        public PetDTO SavePet(PetDTO pet, PetAccomodation accomodation)
         {
             try 
             {
-                PetAccomodation accomodation = _accomodationServices.GetAccomodationById(pet.AccomodationId);
-
+               
                 if(accomodation.Available == true) 
                 {
                     accomodation.Available = false;
@@ -123,11 +120,11 @@ namespace PetshopAtlantico.Services.Implementation
             }
         }
 
-        public Pet SearchPetByName(string name)
+        public List<Pet> SearchPetByName(string name)
         {
             try 
-            { 
-                Pet petSearch = _context.Pets.Where(x => x.Name == name).FirstOrDefault();
+            {
+                List<Pet> petSearch = _context.Pets.Where(x => x.Name.StartsWith(name)).OrderBy(p => p.Name).ToList();
                 return petSearch;
 
             }catch(Exception ex)
@@ -144,7 +141,7 @@ namespace PetshopAtlantico.Services.Implementation
 
                 PetAccomodation accomodation = _context.PetAccomodations.FirstOrDefault(p => p.PetAccomodationId == pet.AccomodationId);
 
-                if (accomodation.Available) 
+                if (accomodation.Available || pet.AccomodationId == actuallyAccomodation.PetAccomodationId) 
                 {
 
                     actuallyAccomodation.Available = true;

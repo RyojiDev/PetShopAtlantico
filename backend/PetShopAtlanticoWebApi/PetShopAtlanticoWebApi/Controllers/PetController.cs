@@ -15,10 +15,13 @@ namespace PetShopAtlanticoWebApi.Controllers
     public class PetController : ControllerBase
     {
         private readonly IPetServices _petServices;
+        private readonly IPetAccomodationServices _accomodationServices;
 
-        public PetController(IPetServices petServices)
+        public PetController(IPetServices petServices, IPetAccomodationServices accomodationServices)
         {
             _petServices = petServices;
+            _accomodationServices = accomodationServices;
+
         }
 
         [HttpGet("GetAllPets")]
@@ -32,7 +35,8 @@ namespace PetShopAtlanticoWebApi.Controllers
         [HttpPost("SavePet")]
         public IActionResult SavePet([FromBody] PetDTO pet)
         {
-            PetDTO petCreate = _petServices.SavePet(pet);
+            PetAccomodation accomodation = _accomodationServices.GetAccomodationById(pet.AccomodationId);
+            PetDTO petCreate = _petServices.SavePet(pet, accomodation);
             if (petCreate == null)
                 return NotFound();
             return Created($"/api/Pet/{petCreate}",petCreate);
@@ -41,7 +45,7 @@ namespace PetShopAtlanticoWebApi.Controllers
         [HttpGet("SearchPet")]
         public IActionResult SearchPetByName(string name)
         {
-            Pet pet = _petServices.SearchPetByName(name);
+            List<Pet> pet = _petServices.SearchPetByName(name);
             if (pet == null)
                 return NotFound();
             return Ok(pet);

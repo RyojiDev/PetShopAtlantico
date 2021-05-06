@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PetshopAtlantico.Domain.PetOwner">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgCAAAAAAAAAQAEAAAAAACAAAAIAAAAAA=</HashCode>
+      <FileName>PetOwner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PetShopAtlantico.Domain.PetAccomodation">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAARgAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>PetAccomodation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PetshopAtlantico.Domain.Pet">
+    <Position X="1.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAABAAAAAAAAAAAAAAQAAAQAAAAAABAAAAAAQAA=</HashCode>
+      <FileName>Pet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PetShopAtlantico.Domain.Enums.AccommodationStatus">
+    <Position X="6.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Enums\AccommodationStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PetShopAtlantico.Domain.Enums.PetHealth">
+    <Position X="1.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAYAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\PetHealth.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
